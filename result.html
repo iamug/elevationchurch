@@ -1,0 +1,125 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> Example for Elevation Church</title>
+
+    <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="./dist/css/custom.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-dark bg-dark site-header sticky-top py-3">
+      <a class="navbar-brand" href="#"> <img src="./assets/img/elevationchurch_logo.png" alt="logo"  style="height: 50px;" /> </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3" id="capture">
+
+      <div class=" mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden d-none d-lg-block d-xl-block">
+        <div class="my-3 py-3">
+          <img src="./assets/img/Super thank you-amico.png" class="img-fluid" alt="Thank you image" style="height: 500px;">
+        </div>
+      
+      </div>
+
+      <div class=" mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-left overflow-hidden h-100">
+        <div class="my-5 px-5 py-5 card">
+            <div class="row">
+            <div  class="col-md-8 pl-0 text-left">
+                <h2 class="display-5 py-2">Thank you for sharing</h2>
+                <p class="lead mt-2" id="info"> kindly download image and share on your social media.</p>
+            </div>
+         
+          <div class="col-md-4 text-right">
+            <img src="./assets/img/elevationchurch_logo.png" alt="logo"  class="img-round bg-dark py-3 px-2"  style="height: 70px;" /> 
+          </div>
+
+        </div>
+
+
+          <form class="mt-4">
+              
+            <div class=" form-group mb-4">
+                <label for="church" class="" >Church : </label>
+               <span id="church" class="ml-2 h5 mb-0 font-weight-bold">  The Elevetion Church</span>
+              </div>
+
+          <div class=" form-group mb-4">
+            <label for="name" class="" >Name : </label>
+           <span id="name" class="ml-2 h5 mb-0 font-weight-bold"> </span>
+          </div>
+          <p></p>
+          <div class=" form-group mb-5">
+            <label for="name" class="" >Share love: </label>
+           <span id="love" class="ml-2 h5 mb-0 font-weight-bold"> </span>
+          </div>
+         
+        </form>
+        </div>
+       
+      </div>
+    </div>
+    <div class="d-md-flex flex-md-equal my-md-3 pl-md-3">
+        <div class="col-md-6 p-0" ></div>
+        <div class="col-md-6 p-0 float-right text-right" >
+            <div class=" mr-md-3 pt-3 px-5 px-md-5 text-right">
+            <button class="btn btn-primary" onclick="handleDownload(); return false;"> <i class=" px-2 fa fa-download"></i>Download</button>
+
+          </div>
+          </div>
+    </div>
+    <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="./assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+
+    <script defer src="./dist/js/bootstrap.min.js"></script>
+    <script defer src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script defer>
+
+    $(function() { handleReady(); });
+
+      const handleReady = () => {
+        let name = localStorage.getItem("name");
+        let love = localStorage.getItem("love");
+        if ( !name || !love ){
+            window.location.href= "index.html";
+            return
+        }
+        $("#name").text(name)
+        $("#love").text(love)
+        console.log("in", name , love)
+      }
+      const handleDownload = () => {
+
+        $("#info").hide()
+        html2canvas(document.querySelector("#capture"), ).then(canvas => {
+    //document.body.appendChild(canvas)
+    canvas.toBlob(
+  blob => {
+    const anchor = document.createElement('a');
+    anchor.download = localStorage.getItem("name") + '.jpg'; // optional, but you can give the file a name
+    anchor.href = URL.createObjectURL(blob);
+    anchor.click(); // ✨ magic!
+    URL.revokeObjectURL(anchor.href); // remove it from memory and save on memory! 😎
+  },
+  'image/jpeg',
+  0.9,
+);  
+});
+$("#info").show()
+      }
+    </script>
+  </body>
+</html>
+
